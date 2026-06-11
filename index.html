@@ -43,7 +43,6 @@
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
     }
 
-    /* 사진 1은 항상 고정 */
     .fixed-img {
       position: absolute;
       inset: 0;
@@ -53,7 +52,6 @@
       object-fit: cover;
     }
 
-    /* 제목, 사진2, 문단만 슬라이드 */
     .slides {
       position: absolute;
       inset: 0;
@@ -61,7 +59,7 @@
       width: 100%;
       height: 300%;
       transform: translateY(0);
-      transition: transform 900ms cubic-bezier(0.77, 0, 0.175, 1);
+      transition: transform 950ms cubic-bezier(0.76, 0, 0.24, 1);
       will-change: transform;
     }
 
@@ -90,8 +88,8 @@
       justify-content: center;
       align-items: center;
       color: white;
-      font-size: clamp(30px, 5.2vw, 68px);
-      font-weight: 500;
+      font-size: clamp(15px, 2.6vw, 34px);
+      font-weight: 400;
       line-height: 0.82;
       letter-spacing: 0.06em;
       text-align: center;
@@ -99,11 +97,11 @@
     }
 
     .title span {
-      font-weight: 500;
+      font-weight: 400;
     }
 
     .title .bold {
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .paragraph {
@@ -114,7 +112,7 @@
       top: 24%;
       color: white;
       font-size: clamp(10px, 1.35vw, 14px);
-      font-weight: 500;
+      font-weight: 400;
       line-height: 1.22;
       letter-spacing: -0.02em;
       text-align: left;
@@ -123,44 +121,64 @@
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
     }
 
-    .arrow {
+    .nav-arrow {
       position: absolute;
-      z-index: 10;
+      z-index: 20;
       left: 50%;
-      transform: translateX(-50%);
+      width: 42px;
+      height: 42px;
       border: none;
       background: transparent;
-      color: white;
-      font-family: "Source Code Variable", "Source Code Pro", monospace;
-      font-size: clamp(24px, 4vw, 42px);
-      font-weight: 500;
       cursor: pointer;
-      opacity: 0.85;
-      padding: 12px 20px;
-      text-shadow: 0 3px 15px rgba(0, 0, 0, 0.8);
-      transition:
-        opacity 250ms ease,
-        transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .arrow:hover {
       opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%);
+      transition:
+        opacity 280ms ease,
+        visibility 280ms ease,
+        transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .arrow.down {
-      bottom: 2.5%;
+    .nav-arrow::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 15px;
+      height: 15px;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.8));
     }
 
-    .arrow.up {
-      top: 2.5%;
+    .nav-arrow.up {
+      top: 3%;
     }
 
-    .arrow.down:hover {
-      transform: translateX(-50%) translateY(5px);
+    .nav-arrow.down {
+      bottom: 3%;
     }
 
-    .arrow.up:hover {
-      transform: translateX(-50%) translateY(-5px);
+    .nav-arrow.up::before {
+      transform: translate(-50%, -35%) rotate(225deg);
+    }
+
+    .nav-arrow.down::before {
+      transform: translate(-50%, -65%) rotate(45deg);
+    }
+
+    .nav-arrow.up:hover {
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    .nav-arrow.down:hover {
+      transform: translateX(-50%) translateY(4px);
+    }
+
+    .nav-arrow.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -168,11 +186,9 @@
 <body>
   <main class="stage">
     <section class="frame">
-      <!-- 사진 1은 여기서 고정됨 -->
       <img class="fixed-img" src="img1.png" alt="First project image" />
 
       <div class="slides">
-        <!-- 1번째 화면: 제목만 슬라이드 -->
         <section class="slide">
           <h1 class="title">
             <span>THE</span>
@@ -180,19 +196,12 @@
             <span class="bold">CAR</span>
             <span>PET</span>
           </h1>
-
-          <button class="arrow down" onclick="goToSlide(1)">↓</button>
         </section>
 
-        <!-- 2번째 화면: 사진2가 사진1 위를 덮음 -->
         <section class="slide">
           <img class="cover-img" src="img2.png" alt="Second project image" />
-
-          <button class="arrow up" onclick="goToSlide(0)">↑</button>
-          <button class="arrow down" onclick="goToSlide(2)">↓</button>
         </section>
 
-        <!-- 3번째 화면: 문단만 사진1 위에 올라옴 -->
         <section class="slide">
           <p class="paragraph">
             Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
@@ -200,18 +209,29 @@
             Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
             Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
           </p>
-
-          <button class="arrow up" onclick="goToSlide(1)">↑</button>
         </section>
       </div>
+
+      <button class="nav-arrow up hidden" onclick="goToSlide(currentSlide - 1)" aria-label="Previous slide"></button>
+      <button class="nav-arrow down" onclick="goToSlide(currentSlide + 1)" aria-label="Next slide"></button>
     </section>
   </main>
 
   <script>
     const slides = document.querySelector(".slides");
+    const upArrow = document.querySelector(".nav-arrow.up");
+    const downArrow = document.querySelector(".nav-arrow.down");
+
+    let currentSlide = 0;
+    const totalSlides = 3;
 
     function goToSlide(index) {
-      slides.style.transform = `translateY(-${index * 33.333333}%)`;
+      currentSlide = Math.max(0, Math.min(index, totalSlides - 1));
+
+      slides.style.transform = `translateY(-${currentSlide * 33.333333}%)`;
+
+      upArrow.classList.toggle("hidden", currentSlide === 0);
+      downArrow.classList.toggle("hidden", currentSlide === totalSlides - 1);
     }
   </script>
 </body>
