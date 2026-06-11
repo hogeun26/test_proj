@@ -43,7 +43,21 @@
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
     }
 
+    /* 사진 1은 항상 고정 */
+    .fixed-img {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 제목, 사진2, 문단만 슬라이드 */
     .slides {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
       width: 100%;
       height: 300%;
       transform: translateY(0);
@@ -58,9 +72,10 @@
       overflow: hidden;
     }
 
-    .slide img {
+    .cover-img {
       position: absolute;
       inset: 0;
+      z-index: 3;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -69,7 +84,7 @@
     .title {
       position: absolute;
       inset: 0;
-      z-index: 2;
+      z-index: 4;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -93,7 +108,7 @@
 
     .paragraph {
       position: absolute;
-      z-index: 2;
+      z-index: 4;
       left: 9%;
       right: 9%;
       top: 24%;
@@ -153,11 +168,12 @@
 <body>
   <main class="stage">
     <section class="frame">
-      <div class="slides">
-        <!-- 1번째 화면: 제목 + 사진1 -->
-        <section class="slide">
-          <img src="img1.png" alt="First project image" />
+      <!-- 사진 1은 여기서 고정됨 -->
+      <img class="fixed-img" src="img1.png" alt="First project image" />
 
+      <div class="slides">
+        <!-- 1번째 화면: 제목만 슬라이드 -->
+        <section class="slide">
           <h1 class="title">
             <span>THE</span>
             <span>RED</span>
@@ -168,19 +184,16 @@
           <button class="arrow down" onclick="goToSlide(1)">↓</button>
         </section>
 
-        <!-- 2번째 화면: 사진1 + 사진2 -->
+        <!-- 2번째 화면: 사진2가 사진1 위를 덮음 -->
         <section class="slide">
-          <img src="img1.png" alt="First project image" />
-          <img src="img2.png" alt="Second project image" />
+          <img class="cover-img" src="img2.png" alt="Second project image" />
 
           <button class="arrow up" onclick="goToSlide(0)">↑</button>
           <button class="arrow down" onclick="goToSlide(2)">↓</button>
         </section>
 
-        <!-- 3번째 화면: 문단 + 사진1 -->
+        <!-- 3번째 화면: 문단만 사진1 위에 올라옴 -->
         <section class="slide">
-          <img src="img1.png" alt="First project image" />
-
           <p class="paragraph">
             Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
             Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
