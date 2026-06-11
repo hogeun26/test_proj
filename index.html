@@ -1,61 +1,158 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 프로젝트 페이지</title>
-    <style>
-        /* 🎨 여기에 원하는 배경색을 입력하세요 (영어 색상 이름이나 #색상코드) */
-        body {
-            background-color: #f4f6f9; /* 연한 회색 배경 */
-            color: #333333;            /* 기본 글자 색상 */
-            font-family: 'Malgun Gothic', sans-serif;
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;       /* 모든 요소를 화면 중앙으로 정렬 */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Red Carpet</title>
 
-        /* 📦 콘텐츠를 담는 깔끔한 상자 */
-        .container {
-            max-width: 800px;          /* 레이아웃 최대 너비 */
-            width: 100%;
-            text-align: center;        /* 글씨와 사진을 중앙 정렬 */
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        /* 📷 이미지 스타일 */
-        .project-img {
-            max-width: 100%;           /* 화면 크기에 맞게 이미지 축소 */
-            height: auto;
-            border-radius: 12px;       /* 사진 모서리를 둥글게 */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* 사진 뒤에 은은한 그림자 */
-            margin: 20px 0;            /* 사진 위아래 간격 */
-        }
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 400vh;
+      background: #111;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-        /* ✍️ 제목과 글 스타일 */
-        h1 { font-size: 2.5rem; color: #1a1a1a; margin-bottom: 10px; }
-        p { font-size: 1.1rem; line-height: 1.8; color: #555; text-align: left; inline-size: fit-content; margin: 0 auto; }
-    </style>
+    .stage {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4vh 0;
+      overflow: hidden;
+    }
+
+    .frame {
+      position: relative;
+      height: min(92vh, 160vw);
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #000;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    }
+
+    .base-img,
+    .cover-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .base-img {
+      z-index: 1;
+    }
+
+    .cover-img {
+      z-index: 3;
+      transform: translateY(100%);
+      will-change: transform;
+    }
+
+    .title {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      color: white;
+      font-size: clamp(32px, 5vw, 72px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-align: center;
+      text-transform: lowercase;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+      will-change: transform, opacity;
+    }
+
+    .paragraph {
+      position: absolute;
+      z-index: 2;
+      left: 9%;
+      right: 9%;
+      top: 50%;
+      transform: translateY(30px);
+      opacity: 0;
+      color: white;
+      font-size: clamp(14px, 2vw, 21px);
+      line-height: 1.55;
+      text-align: left;
+      padding: 22px;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(5px);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      will-change: transform, opacity;
+    }
+  </style>
 </head>
+
 <body>
+  <main class="stage">
+    <section class="frame">
+      <img class="base-img" src="img1.png" alt="First project image" />
 
-    <div class="container">
-        <!-- 1. 제목 적는 곳 -->
-        <h1>🚀 멋진 프로젝트 제목</h1>
-        
-        <!-- 2. 중앙 정렬된 사진 (올린 사진 파일명으로 바꿔주세요) -->
-        <img src="photo1.jpg" alt="프로젝트 결과물" class="project-img">
-        
-        <!-- 3. 사진 아래에 들어갈 설명 글 -->
-        <div style="margin-top: 30px;">
-            <p>
-                여기에 사진 아래에 들어갈 글을 자유롭게 작성하시면 됩니다.<br>
-                줄을 바꾸고 싶을 때는 문장 끝에 이렇게 &lt;br&gt; 태그를 넣어주면 줄바꿈이 됩니다.<br><br>
-                프로젝트 배경, 목적, 결과 등을 자유롭게 서술해 보세요!
-            </p>
-        </div>
-    </div>
+      <h1 class="title">the red carpet</h1>
 
+      <p class="paragraph">
+        Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+        Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+        Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+        Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+      </p>
+
+      <img class="cover-img" src="img2.png" alt="Second project image" />
+    </section>
+  </main>
+
+  <script>
+    const title = document.querySelector(".title");
+    const coverImg = document.querySelector(".cover-img");
+    const paragraph = document.querySelector(".paragraph");
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function updateScrollAnimation() {
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+
+      const firstPhase = clamp(progress / 0.36, 0, 1);
+      const secondPhase = clamp((progress - 0.36) / 0.32, 0, 1);
+      const thirdPhase = clamp((progress - 0.68) / 0.18, 0, 1);
+
+      title.style.transform = `translateY(${-130 * firstPhase}%)`;
+      title.style.opacity = `${1 - firstPhase}`;
+
+      if (progress <= 0.36) {
+        coverImg.style.transform = `translateY(${100 - 100 * firstPhase}%)`;
+      } else {
+        coverImg.style.transform = `translateY(${-100 * secondPhase}%)`;
+      }
+
+      paragraph.style.opacity = `${thirdPhase}`;
+      paragraph.style.transform = `translateY(${30 - 30 * thirdPhase}px)`;
+    }
+
+    window.addEventListener("scroll", updateScrollAnimation);
+    window.addEventListener("resize", updateScrollAnimation);
+
+    updateScrollAnimation();
+  </script>
 </body>
 </html>
