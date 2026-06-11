@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 프로젝트 페이지</title>
+    <style>
+        /* 🎨 여기에 원하는 배경색을 입력하세요 (영어 색상 이름이나 #색상코드) */
+        body {
+            background-color: #f4f6f9; /* 연한 회색 배경 */
+            color: #333333;            /* 기본 글자 색상 */
+            font-family: 'Malgun Gothic', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;       /* 모든 요소를 화면 중앙으로 정렬 */
+        }
+
+        /* 📦 콘텐츠를 담는 깔끔한 상자 */
+        .container {
+            max-width: 800px;          /* 레이아웃 최대 너비 */
+            width: 100%;
+            text-align: center;        /* 글씨와 사진을 중앙 정렬 */
+        }
+
+        /* 📷 이미지 스타일 */
+        .project-img {
+            max-width: 100%;           /* 화면 크기에 맞게 이미지 축소 */
+            height: auto;
+            border-radius: 12px;       /* 사진 모서리를 둥글게 */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* 사진 뒤에 은은한 그림자 */
+            margin: 20px 0;            /* 사진 위아래 간격 */
+        }
+
+        /* ✍️ 제목과 글 스타일 */
+        h1 { font-size: 2.5rem; color: #1a1a1a; margin-bottom: 10px; }
+        p { font-size: 1.1rem; line-height: 1.8; color: #555; text-align: left; inline-size: fit-content; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 1. 제목 적는 곳 -->
+        <h1>🚀 멋진 프로젝트 제목</h1>
+        
+        <!-- 2. 중앙 정렬된 사진 (올린 사진 파일명으로 바꿔주세요) -->
+        <img src="photo1.jpg" alt="프로젝트 결과물" class="project-img">
+        
+        <!-- 3. 사진 아래에 들어갈 설명 글 -->
+        <div style="margin-top: 30px;">
+            <p>
+                여기에 사진 아래에 들어갈 글을 자유롭게 작성하시면 됩니다.<br>
+                줄을 바꾸고 싶을 때는 문장 끝에 이렇게 &lt;br&gt; 태그를 넣어주면 줄바꿈이 됩니다.<br><br>
+                프로젝트 배경, 목적, 결과 등을 자유롭게 서술해 보세요!
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
